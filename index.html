@@ -344,7 +344,7 @@
   <p>Designed &amp; crafted with 💙 by <span class="hl">Amit Kumar</span> · Flutter Developer · Agra, India · © 2026</p>
 </footer>
 
-<!-- PROJECT MODAL -->
+<!-- ═══ PROJECT MODAL (LIGHT THEME) ═══ -->
 <div class="modal-overlay" id="modalOverlay" onclick="handleOverlayClick(event)">
   <div class="modal" id="modal">
     <div class="modal-top-border"></div>
@@ -371,6 +371,17 @@
       <div class="modal-store" id="modalStore"></div>
     </div>
   </div>
+</div>
+
+<!-- ═══ LIGHTBOX ═══ -->
+<div class="lightbox-overlay" id="lightboxOverlay" onclick="if(event.target===this)closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()"><i class="ri-close-line"></i></button>
+  <button class="lightbox-nav lightbox-prev" onclick="lightboxPrev()"><i class="ri-arrow-left-s-line"></i></button>
+  <div class="lightbox-img-wrap">
+    <img id="lightboxImg" src="" alt="Screenshot" />
+  </div>
+  <button class="lightbox-nav lightbox-next" onclick="lightboxNext()"><i class="ri-arrow-right-s-line"></i></button>
+  <div class="lightbox-counter" id="lightboxCounter">1 / 3</div>
 </div>
 
 <script src="script.js"></script>
