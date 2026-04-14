@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Amit Kumar — Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- Cursor -->
+<div class="cur" id="cur"></div>
+<div class="cur-ring" id="curRing"></div>
+
+<!-- Background -->
+<canvas id="stars-canvas"></canvas>
+<div class="aurora a1"></div>
+<div class="aurora a2"></div>
+<div class="aurora a3"></div>
+<div class="ss ss1"></div>
+<div class="ss ss2"></div>
+<div class="ss ss3"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-inner">
+    <a class="logo-wrap" data-page="home">
+      <div class="logo-mark">AK</div>
+      <div class="logo-name">Amit Kumar <span>·dev</span></div>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a data-page="home" class="active"><i class="ri-user-3-line"></i> About</a></li>
+      <li><a data-page="skills"><i class="ri-code-s-slash-line"></i> Skills</a></li>
+      <li><a data-page="experience"><i class="ri-briefcase-4-line"></i> Work</a></li>
+      <li><a data-page="projects"><i class="ri-rocket-line"></i> Projects</a></li>
+      <li><a data-page="contact"><i class="ri-mail-send-line"></i> Contact</a></li>
+    </ul>
+    <a href="mailto:amitk15042003@gmail.com" class="nav-cta"><i class="ri-send-plane-fill"></i> Hire Me</a>
+    <button class="mob-btn" id="mobBtn"><i class="ri-menu-line"></i></button>
+  </div>
+</nav>
+
+<!-- PAGE CONTENT -->
+<div class="page-content">
+
+  <!-- ═══ HOME PAGE ═══ -->
+  <div class="page active" id="page-home">
+    <section class="hero" id="about">
+      <div class="hero-grid">
+        <div class="hero-left">
+          <div class="status-pill"><div class="status-dot"></div> Open to Opportunities</div>
+          <h1 class="hero-name">
+            <div class="line"><span>Hi, I'm</span></div>
+            <div class="line"><span class="gradient-text">Amit Kumar</span></div>
+            <div class="line"><span style="font-size:.55em;font-weight:700;color:var(--muted)">Flutter Dev</span></div>
+          </h1>
+          <p class="hero-role"><span id="tw"></span><span class="role-cursor"></span></p>
+          <p class="hero-desc">Building pixel-perfect mobile apps and robust backend systems. Turning complex ideas into seamless digital experiences — one Flutter widget at a time.</p>
+          <div class="hero-btns">
+            <a href="mailto:amitk15042003@gmail.com" class="btn-primary"><i class="ri-send-plane-fill"></i> Let's Talk</a>
+            <a href="Amit_kumar_Resume.pdf" download="Amit-Kumar-CV.pdf" class="btn-ghost"><i class="ri-download-line"></i> Download CV</a>
+          </div>
+        </div>
+        <div class="hero-right">
+          <div class="avatar-wrap">
+            <div class="ring ring-3"><div class="node"><i class="ri-server-line"></i></div></div>
+            <div class="ring ring-2"><div class="node"><i class="ri-code-s-slash-line"></i></div></div>
+            <div class="ring ring-1"><div class="node"><i class="ri-flutter-fill"></i></div></div>
+            <div class="avatar-core">
+              <div class="avatar-initials">AK</div>
+              <div class="avatar-sub">Flutter Dev</div>
+            </div>
+          </div>
+          <div class="chip c1"><div class="chip-icon" style="background:rgba(59,130,246,.15);color:#2563eb">📱</div>Flutter Expert</div>
+          <div class="chip c2"><div class="chip-icon" style="background:rgba(6,214,160,.15);color:#059669">⚙️</div>Full Stack</div>
+          <div class="chip c3"><div class="chip-icon" style="background:rgba(139,92,246,.15);color:#7c3aed">🚀</div>2+ Yrs Exp</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="eye-container">
+          <svg class="eye-svg" viewBox="0 0 60 40" xmlns="http://www.w3.org/2000/svg">
+            <g class="flame-group"><ellipse class="flame f3" cx="30" cy="10" rx="7" ry="10" fill="#f97316" opacity="0.6"/><ellipse class="flame f2" cx="30" cy="12" rx="5" ry="8" fill="#fb923c" opacity="0.8"/><ellipse class="flame f1" cx="30" cy="14" rx="3" ry="5" fill="#fbbf24"/></g>
+            <ellipse cx="30" cy="28" rx="26" ry="11" fill="white" stroke="#cbd5e1" stroke-width="1"/>
+            <circle class="iris" cx="30" cy="28" r="7" fill="#3b82f6"/><circle class="pupil" cx="30" cy="28" r="3.5" fill="#1e3a8a"/><circle cx="33" cy="25.5" r="1.8" fill="white" opacity="0.9"/>
+            <path class="eyelid-top" d="M4,28 Q30,17 56,28" fill="white" stroke="#cbd5e1" stroke-width="1"/>
+            <line x1="10" y1="24" x2="8" y2="20" stroke="#94a3b8" stroke-width="1" stroke-linecap="round"/><line x1="20" y1="20" x2="19" y2="16" stroke="#94a3b8" stroke-width="1" stroke-linecap="round"/><line x1="30" y1="18" x2="30" y2="14" stroke="#94a3b8" stroke-width="1" stroke-linecap="round"/><line x1="40" y1="20" x2="41" y2="16" stroke="#94a3b8" stroke-width="1" stroke-linecap="round"/><line x1="50" y1="24" x2="52" y2="20" stroke="#94a3b8" stroke-width="1" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <span class="stat-num" data-t="7">0+</span>
+        <div class="stat-lbl">🚀 Projects Shipped</div>
+      </div>
+      <div class="stat-card">
+        <div class="eye-container">
+          <svg class="eye-svg" viewBox="0 0 60 40" xmlns="http://www.w3.org/2000/svg">
+            <g class="flame-group"><ellipse cx="30" cy="10" rx="7" ry="10" fill="#f97316" opacity="0.6"/><ellipse cx="30" cy="12" rx="5" ry="8" fill="#fb923c" opacity="0.8"/><ellipse cx="30" cy="14" rx="3" ry="5" fill="#fbbf24"/></g>
+            <ellipse cx="30" cy="28" rx="26" ry="11" fill="white" stroke="#cbd5e1" stroke-width="1"/>
+            <circle cx="30" cy="28" r="7" fill="#8b5cf6"/><circle cx="30" cy="28" r="3.5" fill="#4c1d95"/><circle cx="33" cy="25.5" r="1.8" fill="white" opacity="0.9"/>
+            <path d="M4,28 Q30,17 56,28" fill="white" stroke="#cbd5e1" stroke-width="1"/>
+            <line x1="10" y1="24" x2="8" y2="20" stroke="#94a3b8" stroke-width="1" stroke-linecap="round"/><line x1="20" y1="20" x2="19" y2="16" stroke="#94a3b8" stroke-width="1" stroke-linecap="round"/><line x1="30" y1="18" x2="30" y2="14" stroke="#94a3b8" stroke-width="1" stroke-linecap="round"/><line x1="40" y1="20" x2="41" y2="16" stroke="#94a3b8" stroke-width="1" stroke-linecap="round"/><line x1="50" y1="24" x2="52" y2="20" stroke="#94a3b8" stroke-width="1" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <span class="stat-num" data-t="2">0+</span>
+        <div class="stat-lbl">⭐ Years of Experience</div>
+      </div>
+      <div class="stat-card">
+        <div class="eye-container">
+          <svg class="eye-svg" viewBox="0 0 60 40" xmlns="http://www.w3.org/2000/svg">
+            <g class="flame-group"><ellipse cx="30" cy="10" rx="7" ry="10" fill="#f97316" opacity="0.6"/><ellipse cx="30" cy="12" rx="5" ry="8" fill="#fb923c" opacity="0.8"/><ellipse cx="30" cy="14" rx="3" ry="5" fill="#fbbf24"/></g>
+            <ellipse cx="30" cy="28" rx="26" ry="11" fill="white" stroke="#cbd5e1" stroke-width="1"/>
+            <circle cx="30" cy="28" r="7" fill="#06d6a0"/><circle cx="30" cy="28" r="3.5" fill="#065f46"/><circle cx="33" cy="25.5" r="1.8" fill="white" opacity="0.9"/>
+            <path d="M4,28 Q30,17 56,28" fill="white" stroke="#cbd5e1" stroke-width="1"/>
+            <line x1="10" y1="24" x2="8" y2="20" stroke="#94a3b8" stroke-width="1" stroke-linecap="round"/><line x1="20" y1="20" x2="19" y2="16" stroke="#94a3b8" stroke-width="1" stroke-linecap="round"/><line x1="30" y1="18" x2="30" y2="14" stroke="#94a3b8" stroke-width="1" stroke-linecap="round"/><line x1="40" y1="20" x2="41" y2="16" stroke="#94a3b8" stroke-width="1" stroke-linecap="round"/><line x1="50" y1="24" x2="52" y2="20" stroke="#94a3b8" stroke-width="1" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <span class="stat-num" data-t="15">0+</span>
+        <div class="stat-lbl">🛠 Technologies Used</div>
+      </div>
+    </div>
+
+    <section class="about-section">
+      <div class="divider"></div>
+      <div class="section-hdr reveal">
+        <div class="section-eyebrow eyebrow-blue">
+          <svg class="section-eye" viewBox="0 0 30 20" width="24" height="16" xmlns="http://www.w3.org/2000/svg"><ellipse cx="15" cy="14" rx="13" ry="5.5" fill="white" stroke="#93c5fd" stroke-width="0.8"/><circle cx="15" cy="14" r="3.5" fill="#3b82f6"/><circle cx="15" cy="14" r="1.5" fill="#1e3a8a"/><circle cx="16.5" cy="12.8" r="0.9" fill="white" opacity="0.9"/></svg>
+          WHO I AM
+        </div>
+        <h2 class="section-title">A Bit <span class="gradient-text">About Me</span></h2>
+        <p class="section-sub">A Flutter developer passionate about building beautiful, performant mobile applications with clean code and solid architecture.</p>
+      </div>
+      <div class="about-grid">
+        <div class="info-card ic-blue full-col reveal">
+          <div class="ic-icon ii-blue"><i class="ri-user-smile-line"></i></div>
+          <h3 class="ic-title">My Story</h3>
+          <p class="ic-body">I'm a Flutter developer from <strong style="color:var(--text)">Agra, India</strong> with 2+ years of hands-on experience building production-grade mobile applications. I started my journey with Java, fell in love with mobile development, and found my true home in Flutter's ecosystem. I believe great apps aren't just functional — they're intuitive, fast, and a joy to use. Currently building at <strong style="color:#2563eb">Kriti Digital Solutions</strong>, I specialize in clean architecture, state management, and crafting experiences users actually love.</p>
+        </div>
+        <div class="info-card ic-purple reveal">
+          <div class="ic-icon ii-purple"><i class="ri-smartphone-line"></i></div>
+          <h3 class="ic-title">Mobile Expertise</h3>
+          <p class="ic-body">Flutter is my primary tool. I work across the full mobile stack — from beautiful UI to deep API integrations and local databases.</p>
+          <div class="tag-wrap"><span class="tag tag-purple">Flutter</span><span class="tag tag-purple">Dart</span><span class="tag tag-purple">GetX</span><span class="tag tag-purple">Provider</span><span class="tag tag-purple">Riverpod</span></div>
+        </div>
+        <div class="info-card ic-teal reveal">
+          <div class="ic-icon ii-teal"><i class="ri-server-line"></i></div>
+          <h3 class="ic-title">Backend & APIs</h3>
+          <p class="ic-body">Comfortable on the server side too — I build and consume RESTful APIs with Node.js and Spring Boot, with solid JWT auth experience.</p>
+          <div class="tag-wrap"><span class="tag tag-teal">Node.js</span><span class="tag tag-teal">Spring Boot</span><span class="tag tag-teal">REST APIs</span><span class="tag tag-teal">JWT</span></div>
+        </div>
+        <div class="info-card ic-gold reveal">
+          <div class="ic-icon ii-gold"><i class="ri-graduation-cap-line"></i></div>
+          <h3 class="ic-title">Education</h3>
+          <p class="ic-body">MCA (Master of Computer Applications) from Mangalayatan University, Aligarh — July 2023 to Aug 2025. Built a strong foundation in mobile development, backend systems, data structures, and software engineering principles.</p>
+          <div class="tag-wrap"><span class="tag tag-gold">MCA</span><span class="tag tag-gold">Computer Applications</span><span class="tag tag-gold">Software Engineering</span></div>
+        </div>
+        <div class="info-card ic-rose reveal">
+          <div class="ic-icon ii-rose"><i class="ri-heart-pulse-line"></i></div>
+          <h3 class="ic-title">Work Philosophy</h3>
+          <p class="ic-body">I care about clean code, clean architecture, and shipping things that actually work. MVC/MVVM patterns are my default, performance optimization is my obsession.</p>
+          <div class="tag-wrap"><span class="tag tag-blue">Clean Code</span><span class="tag tag-blue">MVC / MVVM</span><span class="tag tag-blue">Performance</span></div>
+        </div>
+        <div class="info-card ic-blue full-col reveal">
+          <div class="ic-icon ii-blue"><i class="ri-profile-line"></i></div>
+          <h3 class="ic-title">Quick Info</h3>
+          <div class="info-row" style="margin-top:16px">
+            <div class="info-item"><i class="ri-map-pin-line" style="color:var(--accent);font-size:16px"></i><div><div class="info-label">Location</div><div class="info-val">Agra, India</div></div></div>
+            <div class="info-item"><i class="ri-mail-line" style="color:#06d6a0;font-size:16px"></i><div><div class="info-label">Email</div><div class="info-val">amitk15042003@gmail.com</div></div></div>
+            <div class="info-item"><i class="ri-phone-line" style="color:#d97706;font-size:16px"></i><div><div class="info-label">Phone</div><div class="info-val">+91 639-789-2585</div></div></div>
+            <div class="info-item"><i class="ri-briefcase-line" style="color:#7c3aed;font-size:16px"></i><div><div class="info-label">Status</div><div class="info-val" style="color:#059669">Available for hire</div></div></div>
+            <div class="info-item"><i class="ri-flutter-fill" style="color:#2563eb;font-size:16px"></i><div><div class="info-label">Primary Stack</div><div class="info-val">Flutter / Dart</div></div></div>
+            <div class="info-item"><i class="ri-heart-line" style="color:#e11d48;font-size:16px"></i><div><div class="info-label">Passion</div><div class="info-val">Mobile UX & Clean Arch</div></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ═══ SKILLS PAGE ═══ -->
+  <div class="page" id="page-skills">
+    <section id="skills" class="about-section">
+      <div class="divider"></div>
+      <div class="section-hdr reveal">
+        <div class="section-eyebrow eyebrow-blue"><i class="ri-code-s-slash-line"></i> SKILLS</div>
+        <h2 class="section-title">Skills &amp; <span class="gradient-text">Technologies</span></h2>
+        <p class="section-sub">Everything I use to build production-ready Flutter apps and backend systems — directly from my resume.</p>
+      </div>
+      <div class="about-grid">
+        <div class="info-card ic-blue reveal">
+          <div class="ic-icon ii-blue"><i class="ri-file-code-line"></i></div>
+          <h3 class="ic-title">Languages</h3>
+          <p class="ic-body">Core programming languages I work with daily.</p>
+          <div class="tag-wrap"><span class="tag tag-blue">Java</span><span class="tag tag-blue">Dart</span><span class="tag tag-blue">HTML</span><span class="tag tag-blue">CSS</span><span class="tag tag-blue">JavaScript</span><span class="tag tag-blue">Python</span></div>
+        </div>
+        <div class="info-card ic-purple reveal">
+          <div class="ic-icon ii-purple"><i class="ri-smartphone-line"></i></div>
+          <h3 class="ic-title">Frontend</h3>
+          <p class="ic-body">Building beautiful, responsive mobile &amp; web interfaces.</p>
+          <div class="tag-wrap"><span class="tag tag-purple">Flutter</span><span class="tag tag-purple">React.js</span></div>
+        </div>
+        <div class="info-card ic-teal reveal">
+          <div class="ic-icon ii-teal"><i class="ri-server-line"></i></div>
+          <h3 class="ic-title">Backend</h3>
+          <p class="ic-body">RESTful APIs, authentication &amp; server-side logic.</p>
+          <div class="tag-wrap"><span class="tag tag-teal">Spring Boot</span><span class="tag tag-teal">Node.js</span><span class="tag tag-teal">RESTful APIs</span><span class="tag tag-teal">JWT Authentication</span></div>
+        </div>
+        <div class="info-card ic-gold reveal">
+          <div class="ic-icon ii-gold"><i class="ri-database-2-line"></i></div>
+          <h3 class="ic-title">Databases &amp; Firebase</h3>
+          <p class="ic-body">Data persistence, real-time sync &amp; cloud services.</p>
+          <div class="tag-wrap"><span class="tag tag-gold">MySQL</span><span class="tag tag-gold">Firestore</span><span class="tag tag-gold">Hive</span><span class="tag tag-gold">SQflite</span><span class="tag tag-gold">Cloud Messaging</span><span class="tag tag-gold">Firebase Storage</span><span class="tag tag-gold">Firebase Auth</span></div>
+        </div>
+        <div class="info-card ic-teal full-col reveal">
+          <div class="ic-icon ii-teal"><i class="ri-tools-line"></i></div>
+          <h3 class="ic-title">Tools &amp; Architecture</h3>
+          <p class="ic-body">Version control, state management, HTTP clients &amp; design patterns I use every day.</p>
+          <div class="tag-wrap"><span class="tag tag-teal">Git</span><span class="tag tag-teal">GitHub</span><span class="tag tag-teal">Bitbucket</span><span class="tag tag-teal">Maven</span><span class="tag tag-teal">GetX</span><span class="tag tag-teal">Provider</span><span class="tag tag-teal">Riverpod</span><span class="tag tag-teal">Dio</span><span class="tag tag-teal">http</span><span class="tag tag-teal">MVC</span><span class="tag tag-teal">MVVM</span></div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ═══ EXPERIENCE PAGE ═══ -->
+  <div class="page" id="page-experience">
+    <section id="experience" class="about-section">
+      <div class="divider"></div>
+      <div class="section-hdr reveal">
+        <div class="section-eyebrow eyebrow-blue"><i class="ri-briefcase-4-line"></i> EXPERIENCE</div>
+        <h2 class="section-title">Work <span class="gradient-text">Experience</span></h2>
+        <p class="section-sub">Professional roles where I've shipped production Flutter apps and backend solutions.</p>
+      </div>
+      <div class="about-grid">
+        <div class="info-card ic-blue full-col reveal">
+          <div class="ic-icon ii-blue"><i class="ri-flutter-fill"></i></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:8px">
+            <h3 class="ic-title" style="margin-bottom:0">Flutter Developer</h3>
+            <span class="tag tag-blue" style="font-size:12.5px;padding:6px 14px">Jan 2026 – Present</span>
+          </div>
+          <p class="ic-body" style="margin-bottom:12px;font-weight:600;color:var(--text)">Kriti Digital Solutions</p>
+          <p class="ic-body">Developing and maintaining scalable Flutter applications with clean architecture, RESTful API integration, performance optimization, bug fixing, and feature implementation.</p>
+        </div>
+        <div class="info-card ic-purple full-col reveal">
+          <div class="ic-icon ii-purple"><i class="ri-flutter-fill"></i></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:8px">
+            <h3 class="ic-title" style="margin-bottom:0">Flutter Developer</h3>
+            <span class="tag tag-purple" style="font-size:12.5px;padding:6px 14px">July 2025 – Dec 2025</span>
+          </div>
+          <p class="ic-body" style="margin-bottom:12px;font-weight:600;color:var(--text)">Arema Technologies</p>
+          <p class="ic-body">Worked on production-level Flutter applications, handling feature development, API integration, bug fixing, performance optimization, and implementing scalable architecture using GetX, Provider, Riverpod with MVC/MVVM patterns.</p>
+        </div>
+        <div class="info-card ic-teal full-col reveal">
+          <div class="ic-icon ii-teal"><i class="ri-flutter-fill"></i></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:8px">
+            <h3 class="ic-title" style="margin-bottom:0">Flutter Developer</h3>
+            <span class="tag tag-teal" style="font-size:12.5px;padding:6px 14px">Aug 2024 – June 2025</span>
+          </div>
+          <p class="ic-body" style="margin-bottom:12px;font-weight:600;color:var(--text)">Webhopers Infotech Pvt. Ltd. (Startup)</p>
+          <p class="ic-body">6-month Internship + 4-month Junior Mobile Application Developer. Built production apps using Flutter, Dart, Firebase, State Management (GetX, Provider, Riverpod) and MVC/MVVM architecture.</p>
+        </div>
+        <div class="info-card ic-gold full-col reveal">
+          <div class="ic-icon ii-gold"><i class="ri-flutter-fill"></i></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:8px">
+            <h3 class="ic-title" style="margin-bottom:0">Java Programming Intern</h3>
+            <span class="tag tag-gold" style="font-size:12.5px;padding:6px 14px">July 2024 – Aug 2024</span>
+          </div>
+          <p class="ic-body" style="margin-bottom:12px;font-weight:600;color:var(--text)">Codtech IT Solutions Pvt. Ltd.</p>
+          <p class="ic-body">Completed intensive Java programming training and development projects.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ═══ PROJECTS PAGE ═══ -->
+  <div class="page" id="page-projects">
+    <section id="projects" class="about-section" style="padding-bottom:0">
+      <div class="divider"></div>
+      <div class="section-hdr reveal">
+        <div class="section-eyebrow eyebrow-blue"><i class="ri-rocket-line"></i> PROJECTS</div>
+        <h2 class="section-title">Things I've <span class="gradient-text">built &amp; shipped</span></h2>
+        <p class="section-sub">Real-world Flutter applications — from concept to production, across healthcare, travel, social, and more.</p>
+      </div>
+    </section>
+    <div class="page-header">
+      <div class="header-badges">
+        <span class="h-badge">✦ Flutter</span>
+        <span class="h-badge">✦ 7 Projects</span>
+        <span class="h-badge">✦ 3 on Play Store</span>
+        <span class="h-badge">✦ 2025–2026</span>
+      </div>
+    </div>
+    <div class="filter-bar" id="filterBar">
+      <button class="filter-btn active" data-filter="all"><span>All Projects</span></button>
+      <button class="filter-btn" data-filter="published"><span>Published</span></button>
+      <button class="filter-btn" data-filter="dev"><span>In Development</span></button>
+    </div>
+    <div class="projects-grid" id="projectsGrid"></div>
+  </div>
+
+  <!-- ═══ CONTACT PAGE ═══ -->
+  <div class="page" id="page-contact">
+    <section id="contact" class="about-section">
+      <div class="divider"></div>
+      <div class="section-hdr reveal">
+        <div class="section-eyebrow eyebrow-blue"><i class="ri-mail-send-line"></i> CONTACT</div>
+        <h2 class="section-title">Let's <span class="gradient-text">Build Together</span></h2>
+        <p class="section-sub">Open to freelance, full-time roles, or exciting collaborations. Drop me a message!</p>
+      </div>
+      <div class="about-grid">
+        <div class="info-card ic-blue reveal">
+          <div class="ic-icon ii-blue"><i class="ri-contact-book-line"></i></div>
+          <h3 class="ic-title">Reach Out</h3>
+          <div class="info-row" style="margin-top:24px">
+            <div class="info-item"><i class="ri-mail-line" style="color:#60a5fa;font-size:18px"></i><div><div class="info-label">Email</div><div class="info-val">amitk15042003@gmail.com</div></div></div>
+            <div class="info-item"><i class="ri-phone-line" style="color:#06d6a0;font-size:18px"></i><div><div class="info-label">Phone</div><div class="info-val">+91 6397892585</div></div></div>
+            <div class="info-item"><i class="ri-map-pin-line" style="color:#fbbf24;font-size:18px"></i><div><div class="info-label">Location</div><div class="info-val">Agra, India</div></div></div>
+          </div>
+          <p style="margin-top:32px;margin-bottom:12px;color:var(--muted)">Find me on</p>
+          <div style="display:flex;gap:12px">
+            <a href="https://www.linkedin.com/in/amit-kumar-190965316/" class="tag tag-blue" style="text-decoration:none;padding:8px 18px;font-size:13px">LinkedIn</a>
+            <a href="https://github.com/amitk6397" class="tag tag-purple" style="text-decoration:none;padding:8px 18px;font-size:13px">GitHub</a>
+          </div>
+        </div>
+        <div class="info-card ic-purple reveal">
+          <div class="ic-icon ii-purple"><i class="ri-message-3-line"></i></div>
+          <h3 class="ic-title">Send Message</h3>
+          <form id="contactForm" style="margin-top:24px">
+            <input type="text" id="cName" placeholder="Your Name" required />
+            <input type="email" id="cEmail" placeholder="Your Email" required />
+            <textarea id="cMessage" rows="5" placeholder="Tell me about your project or opportunity..." required></textarea>
+            <button type="button" class="send-btn" onclick="submitContact()">Send Message →</button>
+            <div class="form-success" id="formSuccess">✅ Message sent! I'll get back to you soon.</div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>Designed &amp; crafted with 💙 by <span class="hl">Amit Kumar</span> · Flutter Developer · Agra, India · © 2026</p>
+</footer>
+
+<!-- PROJECT MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="handleOverlayClick(event)">
+  <div class="modal" id="modal">
+    <div class="modal-top-border"></div>
+    <div class="modal-handle"><span></span></div>
+    <div class="modal-header">
+      <div class="modal-header-left">
+        <div class="modal-app-icon" id="modalIcon"></div>
+        <div>
+          <div class="modal-app-name" id="modalName"></div>
+          <div class="modal-app-role" id="modalRole"></div>
+        </div>
+      </div>
+      <button class="modal-close" onclick="closeModal()"><i class="ri-close-line"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-status-badge" id="modalStatus"></div>
+      <div class="screenshots-label">App Screenshots</div>
+      <div class="screenshots-row" id="modalScreenshots"></div>
+      <div class="modal-desc-label">About this app</div>
+      <div class="modal-desc" id="modalDesc"></div>
+      <div class="detail-grid" id="modalDetails"></div>
+      <div class="modal-desc-label">Tech Stack</div>
+      <div class="tech-stack" id="modalTech"></div>
+      <div class="modal-store" id="modalStore"></div>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
