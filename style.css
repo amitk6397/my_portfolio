@@ -29,8 +29,9 @@ body {
 }
 
 /* ── CURSOR ── */
-.cur { position: fixed; width: 10px; height: 10px; background: #3b82f6; border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); transition: width .2s, height .2s, background .2s; mix-blend-mode: multiply; }
-.cur-ring { position: fixed; width: 36px; height: 36px; border: 1.5px solid rgba(59,130,246,0.5); border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); transition: width .25s, height .25s; }
+/* FIX: z-index raised above modal (10000) and lightbox (20000) */
+.cur { position: fixed; width: 10px; height: 10px; background: #3b82f6; border-radius: 50%; pointer-events: none; z-index: 99999; transform: translate(-50%,-50%); transition: width .2s, height .2s, background .2s; mix-blend-mode: multiply; }
+.cur-ring { position: fixed; width: 36px; height: 36px; border: 1.5px solid rgba(59,130,246,0.5); border-radius: 50%; pointer-events: none; z-index: 99998; transform: translate(-50%,-50%); transition: width .25s, height .25s; }
 .cur.hover { width: 18px; height: 18px; background: var(--rose); }
 .cur-ring.hover { width: 54px; height: 54px; border-color: rgba(244,63,94,0.45); }
 
@@ -248,11 +249,10 @@ footer .hl { background: linear-gradient(135deg,#3b82f6,#8b5cf6); -webkit-backgr
 .project-card:hover .phone-mock:nth-child(3){transform:rotate(3deg) translateY(4px)}
 .phone-ss-img { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 0; }
 .phone-placeholder-icon { position: absolute; font-size: 22px; color: rgba(255,255,255,0.2); display: none; }
-/* when image fails to load, show placeholder icon */
 .phone-mock.phone-empty .phone-placeholder-icon { display: flex; }
 .phone-mock.phone-empty { background: #1e293b; }
 
-/* ── CARD APP ICON (replaces emoji) ── */
+/* ── CARD APP ICON ── */
 .card-app-icon-wrap { width: 60px; height: 60px; border-radius: 14px; overflow: hidden; margin-bottom: 14px; box-shadow: 0 8px 20px rgba(0,0,0,0.1); transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1); background: #f0f4ff; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 .project-card:hover .card-app-icon-wrap { transform: rotate(10deg) scale(1.15); }
 .card-app-icon-img { width: 100%; height: 100%; object-fit: cover; display: block; }
@@ -356,7 +356,6 @@ footer .hl { background: linear-gradient(135deg,#3b82f6,#8b5cf6); -webkit-backgr
 }
 .screenshot-thumb:hover { transform: translateY(-6px) scale(1.03); box-shadow: 0 16px 40px rgba(59,130,246,0.2); border-color: rgba(59,130,246,0.4); }
 .screenshot-img { width: 100%; height: 100%; object-fit: cover; display: block; }
-/* empty state for screenshot */
 .screenshot-thumb.screenshot-empty .screenshot-empty-ui { display: flex !important; }
 .screenshot-thumb.screenshot-empty .screenshot-img { display: none; }
 .screenshot-empty-ui {
@@ -368,7 +367,6 @@ footer .hl { background: linear-gradient(135deg,#3b82f6,#8b5cf6); -webkit-backgr
 }
 .screenshot-empty-ui i { font-size: 28px; color: rgba(59,130,246,0.3); }
 .screenshot-empty-ui span { font-size: 11px; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; }
-/* zoom hint on hover */
 .screenshot-zoom-hint {
   position: absolute; inset: 0;
   display: flex; align-items: center; justify-content: center;
@@ -490,12 +488,55 @@ footer .hl { background: linear-gradient(135deg,#3b82f6,#8b5cf6); -webkit-backgr
   .modal-body { padding: 20px; }
   #lightboxImg { max-width: 90vw; }
   .lightbox-nav { width: 40px; height: 40px; font-size: 20px; }
+
+  /* Mobile: hero avatar smaller */
+  .avatar-wrap { width: 280px !important; height: 280px !important; }
+  .ring-1 { width: 190px !important; height: 190px !important; }
+  .ring-2 { width: 240px !important; height: 240px !important; }
+  .ring-3 { width: 280px !important; height: 280px !important; }
+  .avatar-core { width: 130px !important; height: 130px !important; }
+  .avatar-initials { font-size: 36px !important; }
+  .ring-1 .node { width: 36px !important; height: 36px !important; top: -18px !important; left: calc(50% - 18px) !important; }
+  .ring-2 .node { width: 32px !important; height: 32px !important; top: -16px !important; left: calc(50% - 16px) !important; }
+  .ring-3 .node { width: 28px !important; height: 28px !important; top: -14px !important; left: calc(50% - 14px) !important; }
+  .chip.c1 { top: -2%; right: 0%; font-size: 11px; padding: 7px 10px; }
+  .chip.c2 { bottom: 10%; left: -4%; font-size: 11px; padding: 7px 10px; }
+  .chip.c3 { bottom: -2%; right: 0%; font-size: 11px; padding: 7px 10px; }
+
+  /* Mobile: stats 1 column on tiny screens */
+  .stats-row { padding: 0 16px; }
+  .about-section { padding: 0 16px 80px; margin-top: 60px; }
+  .hero-grid { padding: 0 20px; }
+
+  /* Mobile: modal screenshots smaller */
+  .screenshot-thumb { height: 200px; width: 100px; }
+  .lightbox-img-wrap { max-width: 95vw; }
+  #lightboxImg { max-width: 90vw; max-height: 70vh; }
 }
-@media (max-width: 600px) {
+
+@media (max-width: 480px) {
+  .stats-row { grid-template-columns: 1fr !important; }
   .projects-grid { grid-template-columns: 1fr; padding: 0 16px 80px; }
+  .hero-name { font-size: 36px !important; }
+  .section-title { font-size: 28px !important; }
+  .filter-bar { padding: 0 16px; gap: 8px; }
+  .filter-btn { padding: 10px 18px; font-size: 13px; }
+  .modal-app-name { font-size: 20px; }
+  .modal-app-icon { width: 56px; height: 56px; }
 }
+
 @media (max-width: 900px) and (min-width: 601px) {
   .projects-grid { grid-template-columns: repeat(2, 1fr); }
+  .hero-grid { grid-template-columns: 1fr 340px; gap: 40px; }
+  .avatar-wrap { width: 320px !important; height: 320px !important; }
+  .ring-1 { width: 220px !important; height: 220px !important; }
+  .ring-2 { width: 280px !important; height: 280px !important; }
+  .ring-3 { width: 320px !important; height: 320px !important; }
+  .avatar-core { width: 150px !important; height: 150px !important; }
+  .avatar-initials { font-size: 42px !important; }
+  .ring-1 .node { width: 38px !important; height: 38px !important; top: -19px !important; left: calc(50% - 19px) !important; }
+  .ring-2 .node { width: 34px !important; height: 34px !important; top: -17px !important; left: calc(50% - 17px) !important; }
+  .ring-3 .node { width: 30px !important; height: 30px !important; top: -15px !important; left: calc(50% - 15px) !important; }
 }
 
 /* full-column spans */

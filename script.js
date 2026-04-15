@@ -11,8 +11,7 @@ const projects = [
       './public/samagran/3.jpeg',
       './public/samagran/4.jpeg',
       './public/samagran/5.jpeg',
-
-       './public/samagran/6.jpeg',
+      './public/samagran/6.jpeg',
       './public/samagran/7.jpeg',
       './public/samagran/8.jpeg',
       './public/samagran/9.jpeg',
@@ -21,9 +20,9 @@ const projects = [
       './public/samagran/13.jpeg',
       './public/samagran/13.jpeg',
       './public/samagran/14.jpeg',
-       './public/samagran/15.jpeg',
+      './public/samagran/15.jpeg',
       './public/samagran/16.jpeg',
-       './public/samagran/17.jpeg',
+      './public/samagran/17.jpeg',
       './public/samagran/20.jpeg',
     ],
     role: 'Flutter Developer',
@@ -97,22 +96,17 @@ const projects = [
       './public/tocken/3.jpeg',
       './public/tocken/4.jpeg',
       './public/tocken/5.jpeg',
-
-       './public/tocken/6.jpeg',
+      './public/tocken/6.jpeg',
       './public/tocken/7.jpeg',
       './public/tocken/8.jpeg',
-
-       './public/tocken/1.jpeg',
+      './public/tocken/1.jpeg',
       './public/tocken/2.jpeg',
       './public/tocken/9.jpeg',
-
-       './public/tocken/10.jpeg',
+      './public/tocken/10.jpeg',
       './public/tocken/11.jpeg',
       './public/tocken/12.jpeg',
-
-       './public/tocken/13.jpeg',
+      './public/tocken/13.jpeg',
       './public/tocken/14.jpeg',
-    
     ],
     role: 'Flutter Developer (Junior)',
     company: 'Webhopers Infotech Pvt. Ltd.',
@@ -171,6 +165,7 @@ function navigate(page) {
   currentPage = page;
   window.scrollTo(0, 0);
   closeMobileMenu();
+  // FIX: only trigger reveal for NEW elements (not yet animated)
   initReveal();
   if (page === 'projects') renderProjects('all');
   if (page === 'home') initCounters();
@@ -275,9 +270,27 @@ function type() {
 type();
 
 // ─── SCROLL REVEAL ──────────────────────────────────────────────────────────
+// FIX: Keep a single persistent observer. Only observe elements that haven't
+// animated yet (no .in class). Never strip .in from elements that already ran.
+let revealObserver = null;
+
 function initReveal() {
-  const obs = new IntersectionObserver(es => es.forEach(e => e.isIntersecting && e.target.classList.add('in')), { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-  document.querySelectorAll('.reveal').forEach(el => { el.classList.remove('in'); obs.observe(el); });
+  // Disconnect previous observer if any
+  if (revealObserver) revealObserver.disconnect();
+
+  revealObserver = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        revealObserver.unobserve(e.target); // stop watching once animated
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  // Only observe elements that haven't yet received .in
+  document.querySelectorAll('.reveal:not(.in)').forEach(el => {
+    revealObserver.observe(el);
+  });
 }
 initReveal();
 
@@ -408,7 +421,6 @@ function openModal(id) {
   const p = projects.find(x => x.id === id);
   if (!p) return;
 
-  // Header
   const iconWrap = document.getElementById('modalIcon');
   iconWrap.innerHTML = `
     <img src="${p.icon}" alt="${p.name} icon" class="modal-icon-img"
@@ -423,7 +435,6 @@ function openModal(id) {
   sb.className = 'modal-status-badge ' + (p.status === 'published' ? 'status-published' : 'status-dev');
   sb.textContent = p.status === 'published' ? '📱 Published on Play Store' : '🚧 In Development';
 
-  // Screenshots
   const ssRow = document.getElementById('modalScreenshots');
   ssRow.innerHTML = p.screenshots.map((ss, idx) => `
     <div class="screenshot-thumb" onclick="openLightbox(${JSON.stringify(p.screenshots)}, ${idx})" title="Tap to open">
