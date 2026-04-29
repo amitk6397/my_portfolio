@@ -1,8 +1,36 @@
 // ─── DATA ───────────────────────────────────────────────────────────────────
 const projects = [
+   {
+    id: 'playOn',
+    name: 'PLAYON',
+    status: 'dev',
+    emoji: '🕉️',
+    icon: './public/playOn/logo.jpeg',
+    screenshots: [
+      './public/playOn/1.jpeg',
+      './public/playOn/3.jpeg',
+      './public/playOn/4.jpeg',
+      './public/playOn/5.jpeg',
+      './public/playOn/6.jpeg',
+      './public/playOn/7.jpeg',
+      './public/playOn/8.jpeg',
+      './public/playOn/9.jpeg',
+      './public/playOn/10.jpeg',
+      './public/playOn/12.jpeg',
+      './public/playOn/13.jpeg',
+      './public/playOn/13.jpeg',
+      
+    ],
+    role: 'Senior Flutter Developer',
+    company: "Kriti Digital Solutions",
+    period: 'April 2026 – Present',
+    description: 'A dynamic sports streaming platform that brings you live matches, highlights, and updates across cricket, football, tennis, basketball, and more. Watch real-time action, catch match recaps, stream live TV channels, and stay updated with upcoming match schedules and tournaments—all in one place.',
+    tags: ['Flutter', 'Getx', 'Dio', 'Sports / OTT'],
+    playstore: null,
+  },
   {
-    id: 'samagrah',
-    name: 'Samagrah',
+    id: 'samagran',
+    name: 'Samagran',
     status: 'dev',
     emoji: '🕉️',
     icon: './public/samagran/sama.jpeg',
@@ -25,11 +53,11 @@ const projects = [
       './public/samagran/17.jpeg',
       './public/samagran/20.jpeg',
     ],
-    role: 'Flutter Developer',
-    company: 'Kriti Digital Solutions',
+   role: 'Senior Flutter Developer',
+    company: "Kriti Digital Solutions",
     period: 'Jan 2026 – Present',
     description: 'A religious service platform for booking Pandits and purchasing pooja kits for rituals.',
-    tags: ['Flutter', 'Riverpod', 'Religious'],
+    tags: ['Flutter', 'Riverpod', 'Firebase FCM', "Agora RTC","Razorpay Payments","Location", "RESTApis" ],
     playstore: null,
   },
   {
@@ -43,11 +71,11 @@ const projects = [
       './public/eye_hospital/ss2.png',
       './public/eye_hospital/ss3.png',
     ],
-    role: 'Flutter Developer',
-    company: 'Kriti Digital Solutions',
+    role: 'Senior Flutter Developer',
+    company: "Kriti Digital Solutions",
     period: 'Jan 2026 – Present',
     description: 'A healthcare app for booking doctor appointments, managing records, and ordering spectacles online.',
-    tags: ['Flutter', 'GetX', 'Healthcare'],
+    tags: ['Flutter', 'GetX', 'Cashfree Payments', 'Healthcare'],
     playstore: null,
   },
   {
@@ -61,9 +89,9 @@ const projects = [
       './public/n_inter/ss2.png',
       './public/n_inter/ss3.png',
     ],
-    role: 'Flutter Developer',
-    company: 'Arema Technologies',
-    period: 'Jul 2025 – Dec 2025',
+     role: 'Senior Flutter Developer',
+    company: "Kriti Digital Solutions",
+    period: 'Mar 2026 – Apr 2026',
     description: 'A short drama streaming platform with categorized content and subscriptions.',
     tags: ['Flutter', 'GetX', 'OTT / Streaming'],
     playstore: null,
@@ -79,11 +107,11 @@ const projects = [
       './public/oyecam/ss2.png',
       './public/oyecam/ss3.png',
     ],
-    role: 'Flutter Developer',
-    company: 'Arema Technologies',
-    period: 'Jul 2025 – Dec 2025',
+     role: 'Senior Flutter Developer',
+    company: "Kriti Digital Solutions",
+    period: 'Feb 2026 –  Pending',
     description: 'A social platform with chat, calls, live streaming, and a coin-based gifting system.',
-    tags: ['Flutter', 'Provider', 'Social / Live'],
+    tags: ['Getx', 'Hive', 'Agora RTC', "Razorpay Payments", "Dio","socket.io", 'Social / Communication'],
     playstore: null,
   },
   {
@@ -108,11 +136,11 @@ const projects = [
       './public/tocken/13.jpeg',
       './public/tocken/14.jpeg',
     ],
-    role: 'Flutter Developer (Junior)',
-    company: 'Webhopers Infotech Pvt. Ltd.',
-    period: 'Aug 2024 – Jun 2025',
+    role: 'Senior Flutter Developer',
+    company: "Kriti Digital Solutions",
+    period: 'Jan 2026 – Mar 2026',
     description: 'A queue management system for digital token handling with real-time updates.',
-    tags: ['Flutter', 'GetX', 'Queue System'],
+    tags: ['Provider', 'Http', 'PhonePe Payments', 'Flutter', "Shared Preferences",],
     playstore: 'https://play.google.com/store/search?q=tocken',
   },
   {
@@ -120,17 +148,23 @@ const projects = [
     name: 'Mitra Tender',
     status: 'published',
     emoji: '📄',
-    icon: 'public/mitratender/icon.png',
+    icon: './public/mt/logo.jpeg',
     screenshots: [
-      'public/mitratender/ss1.png',
-      'public/mitratender/ss2.png',
-      'public/mitratender/ss3.png',
+       './public/mt/1.jpeg',
+      './public/mt/3.jpeg',
+      './public/mt/4.jpeg',
+      './public/mt/5.jpeg',
+      './public/mt/6.jpeg',
+      './public/mt/7.jpeg',
+      './public/mt/8.jpeg',
+      './public/mt/9.jpeg',
+      './public/mt/10.jpeg',
     ],
     role: 'Flutter Developer (Junior)',
-    company: 'Webhopers Infotech Pvt. Ltd.',
-    period: 'Aug 2024 – Jun 2025',
+    company: "Arema Technologies",
+    period: 'Aug 2025 – Oct 2025',
     description: 'A tender search platform with advanced filtering, document downloads, and real-time data.',
-    tags: ['Flutter', 'GetX', 'Business'],
+    tags: ['Flutter', 'GetX', 'Razorpay Payments', "Dio",],
     playstore: 'https://play.google.com/store/search?q=mitra+tender',
   },
   {
@@ -145,17 +179,17 @@ const projects = [
       'public/opastrip/ss3.png',
     ],
     role: 'Flutter Developer (Junior)',
-    company: 'Webhopers Infotech Pvt. Ltd.',
-    period: 'Aug 2024 – Jun 2025',
+    company: 'Arema Technologies',
+    period: 'jun 2025 – Dec 2025',
     description: 'A travel booking app with flights, hotels, and tour package booking features.',
-    tags: ['Flutter', 'GetX', 'Travel'],
+    tags: ['Flutter', 'GetX', 'Razorpay Payments', "http", "TripJack Services", 'Travel / Booking'],
     playstore: 'https://play.google.com/store/search?q=opas+trip',
   },
 ];
 
 // ─── NAVIGATION ─────────────────────────────────────────────────────────────
 let currentPage = 'home';
-
+ 
 function navigate(page) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.getElementById('page-' + page).classList.add('active');
@@ -165,33 +199,29 @@ function navigate(page) {
   currentPage = page;
   window.scrollTo(0, 0);
   closeMobileMenu();
-  // FIX: only trigger reveal for NEW elements (not yet animated)
   initReveal();
   if (page === 'projects') renderProjects('all');
   if (page === 'home') initCounters();
 }
-
+ 
 document.querySelectorAll('[data-page]').forEach(el => {
   el.addEventListener('click', e => { e.preventDefault(); navigate(el.dataset.page); });
 });
-
+ 
 // ─── MOBILE MENU ────────────────────────────────────────────────────────────
-const mobBtn = document.getElementById('mobBtn');
-const navLinks = document.getElementById('navLinks');
+// NOTE: mobBtn click handler is in index.html inline script (uses mobIcon textContent)
+const navLinksEl = document.getElementById('navLinks');
 function closeMobileMenu() {
-  navLinks.classList.remove('open');
-  mobBtn.innerHTML = '<i class="ri-menu-line"></i>';
+  navLinksEl.classList.remove('open');
+  const mobIcon = document.getElementById('mobIcon');
+  if (mobIcon) mobIcon.textContent = 'menu';
 }
-mobBtn.addEventListener('click', () => {
-  const open = navLinks.classList.toggle('open');
-  mobBtn.innerHTML = open ? '<i class="ri-close-line"></i>' : '<i class="ri-menu-line"></i>';
-});
-
+ 
 // ─── NAV SCROLL ─────────────────────────────────────────────────────────────
 window.addEventListener('scroll', () => {
   document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 50);
 });
-
+ 
 // ─── CURSOR ─────────────────────────────────────────────────────────────────
 const cur = document.getElementById('cur');
 const curR = document.getElementById('curRing');
@@ -214,7 +244,7 @@ document.addEventListener('mouseover', e => {
   if (el) { cur.classList.add('hover'); curR.classList.add('hover'); }
   else { cur.classList.remove('hover'); curR.classList.remove('hover'); }
 });
-
+ 
 // ─── STARS CANVAS ───────────────────────────────────────────────────────────
 (function () {
   const canvas = document.getElementById('stars-canvas');
@@ -256,7 +286,7 @@ document.addEventListener('mouseover', e => {
     requestAnimationFrame(draw);
   })();
 })();
-
+ 
 // ─── TYPING EFFECT ──────────────────────────────────────────────────────────
 const roles = ['Flutter Developer', 'Mobile App Engineer', 'Full Stack Developer', 'Clean Code Advocate'];
 let ri = 0, ci = 0, del = false;
@@ -268,32 +298,25 @@ function type() {
   setTimeout(type, del ? 60 : 100);
 }
 type();
-
+ 
 // ─── SCROLL REVEAL ──────────────────────────────────────────────────────────
-// FIX: Keep a single persistent observer. Only observe elements that haven't
-// animated yet (no .in class). Never strip .in from elements that already ran.
 let revealObserver = null;
-
 function initReveal() {
-  // Disconnect previous observer if any
   if (revealObserver) revealObserver.disconnect();
-
   revealObserver = new IntersectionObserver(entries => {
     entries.forEach(e => {
       if (e.isIntersecting) {
         e.target.classList.add('in');
-        revealObserver.unobserve(e.target); // stop watching once animated
+        revealObserver.unobserve(e.target);
       }
     });
   }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-
-  // Only observe elements that haven't yet received .in
   document.querySelectorAll('.reveal:not(.in)').forEach(el => {
     revealObserver.observe(el);
   });
 }
 initReveal();
-
+ 
 // ─── STAT COUNTERS ──────────────────────────────────────────────────────────
 function initCounters() {
   const cntObs = new IntersectionObserver(es => es.forEach(e => {
@@ -307,7 +330,7 @@ function initCounters() {
   document.querySelectorAll('.stat-card').forEach(c => cntObs.observe(c));
 }
 initCounters();
-
+ 
 // ─── IMAGE HELPER: render img with fallback to emoji ────────────────────────
 function imgWithFallback(src, alt, fallbackEmoji, cssClass = '') {
   return `<img 
@@ -317,14 +340,27 @@ function imgWithFallback(src, alt, fallbackEmoji, cssClass = '') {
     onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
   /><span class="img-fallback" style="display:none">${fallbackEmoji}</span>`;
 }
-
+ 
 // ─── PROJECTS RENDER ────────────────────────────────────────────────────────
 let activeFilter = 'all';
 function renderProjects(filter) {
   activeFilter = filter;
   const grid = document.getElementById('projectsGrid');
   const filtered = filter === 'all' ? projects : projects.filter(p => p.status === filter);
-  grid.innerHTML = filtered.map((p, i) => `
+ 
+  grid.innerHTML = filtered.map((p, i) => {
+    // Card: truncate description to 90 chars
+    const shortDesc = p.description.length > 90
+      ? p.description.slice(0, 90) + '…'
+      : p.description;
+ 
+    // Card: show max 4 tags, rest shown in modal only
+    const visibleTags = p.tags.slice(0, 4);
+    const extraCount = p.tags.length - 4;
+    const tagsHtml = visibleTags.map(t => `<span class="card-tag">${t}</span>`).join('')
+      + (extraCount > 0 ? `<span class="card-tag" style="opacity:.55;font-style:italic">+${extraCount} more</span>` : '');
+ 
+    return `
     <div class="project-card" data-id="${p.id}" onclick="openModal('${p.id}')" style="animation-delay:${i * 0.07}s">
       <div class="card-inner">
         <div class="card-preview">
@@ -339,7 +375,7 @@ function renderProjects(filter) {
                   class="phone-ss-img"
                   onerror="this.parentElement.classList.add('phone-empty');this.style.display='none';"
                 />
-                <i class="ri-smartphone-line phone-placeholder-icon"></i>
+                <span class="ms phone-placeholder-icon">smartphone</span>
               </div>
             `).join('')}
           </div>
@@ -349,31 +385,31 @@ function renderProjects(filter) {
             ${imgWithFallback(p.icon, p.name + ' icon', p.emoji, 'card-app-icon-img')}
           </div>
           <div class="card-name">${p.name}</div>
-          <div class="card-desc">${p.description}</div>
-          <div class="card-tags">${p.tags.map(t => `<span class="card-tag">${t}</span>`).join('')}</div>
+          <div class="card-desc">${shortDesc}</div>
+          <div class="card-tags">${tagsHtml}</div>
           <div class="card-cta">
             <span class="card-cta-text">View Details</span>
-            <div class="card-arrow"><i class="ri-arrow-right-line"></i></div>
+            <div class="card-arrow"><span class="ms" style="font-size:16px">arrow_forward</span></div>
           </div>
         </div>
       </div>
     </div>
-  `).join('');
-
+  `}).join('');
+ 
   document.querySelectorAll('.filter-btn').forEach(btn => {
     btn.classList.toggle('active', btn.dataset.filter === filter);
   });
 }
-
+ 
 document.getElementById('filterBar').addEventListener('click', e => {
   const btn = e.target.closest('.filter-btn');
   if (btn) renderProjects(btn.dataset.filter);
 });
-
+ 
 // ─── LIGHTBOX ───────────────────────────────────────────────────────────────
 let lightboxImages = [];
 let lightboxIndex = 0;
-
+ 
 function openLightbox(images, index) {
   lightboxImages = images;
   lightboxIndex = index;
@@ -381,21 +417,21 @@ function openLightbox(images, index) {
   document.getElementById('lightboxOverlay').classList.add('active');
   document.body.style.overflow = 'hidden';
 }
-
+ 
 function closeLightbox() {
   document.getElementById('lightboxOverlay').classList.remove('active');
 }
-
+ 
 function lightboxNext() {
   lightboxIndex = (lightboxIndex + 1) % lightboxImages.length;
   renderLightbox();
 }
-
+ 
 function lightboxPrev() {
   lightboxIndex = (lightboxIndex - 1 + lightboxImages.length) % lightboxImages.length;
   renderLightbox();
 }
-
+ 
 function renderLightbox() {
   const img = document.getElementById('lightboxImg');
   const counter = document.getElementById('lightboxCounter');
@@ -405,7 +441,7 @@ function renderLightbox() {
   img.onerror = () => { img.style.opacity = '0.3'; };
   counter.textContent = `${lightboxIndex + 1} / ${lightboxImages.length}`;
 }
-
+ 
 document.addEventListener('keydown', e => {
   if (document.getElementById('lightboxOverlay').classList.contains('active')) {
     if (e.key === 'ArrowRight') lightboxNext();
@@ -415,26 +451,27 @@ document.addEventListener('keydown', e => {
   }
   if (e.key === 'Escape') closeModal();
 });
-
+ 
 // ─── MODAL ──────────────────────────────────────────────────────────────────
 function openModal(id) {
   const p = projects.find(x => x.id === id);
   if (!p) return;
-
+ 
   const iconWrap = document.getElementById('modalIcon');
   iconWrap.innerHTML = `
     <img src="${p.icon}" alt="${p.name} icon" class="modal-icon-img"
       onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
     <span class="modal-icon-fallback" style="display:none">${p.emoji}</span>
   `;
-
+ 
   document.getElementById('modalName').textContent = p.name;
   document.getElementById('modalRole').textContent = p.role + ' at ' + p.company;
-
+ 
   const sb = document.getElementById('modalStatus');
   sb.className = 'modal-status-badge ' + (p.status === 'published' ? 'status-published' : 'status-dev');
   sb.textContent = p.status === 'published' ? '📱 Published on Play Store' : '🚧 In Development';
-
+ 
+  // Screenshots — all shown in modal
   const ssRow = document.getElementById('modalScreenshots');
   ssRow.innerHTML = p.screenshots.map((ss, idx) => `
     <div class="screenshot-thumb" onclick="openLightbox(${JSON.stringify(p.screenshots)}, ${idx})" title="Tap to open">
@@ -445,41 +482,57 @@ function openModal(id) {
         onerror="this.parentElement.classList.add('screenshot-empty');this.style.display='none';"
       />
       <div class="screenshot-empty-ui">
-        <i class="ri-image-line"></i>
+        <span class="ms" style="font-size:26px;color:#94a3b8">image</span>
         <span>No Image</span>
       </div>
-      <div class="screenshot-zoom-hint"><i class="ri-zoom-in-line"></i></div>
+      <div class="screenshot-zoom-hint"><span class="ms" style="font-size:15px">zoom_in</span></div>
     </div>
   `).join('');
-
+ 
+  // Full description in modal
   document.getElementById('modalDesc').textContent = p.description;
-
+ 
   document.getElementById('modalDetails').innerHTML = `
-    <div class="detail-item"><div class="detail-label">Role</div><div class="detail-value">${p.role}</div></div>
-    <div class="detail-item"><div class="detail-label">Company</div><div class="detail-value">${p.company}</div></div>
-    <div class="detail-item"><div class="detail-label">Period</div><div class="detail-value">${p.period}</div></div>
-    <div class="detail-item"><div class="detail-label">Status</div><div class="detail-value">${p.status === 'published' ? 'Published' : 'In Development'}</div></div>
+    <div class="detail-item">
+      <div class="detail-label">Role</div>
+      <div class="detail-value">${p.role}</div>
+    </div>
+    <div class="detail-item">
+      <div class="detail-label">Company</div>
+      <div class="detail-value">${p.company}</div>
+    </div>
+    <div class="detail-item">
+      <div class="detail-label">Period</div>
+      <div class="detail-value">${p.period}</div>
+    </div>
+    <div class="detail-item">
+      <div class="detail-label">Status</div>
+      <div class="detail-value">${p.status === 'published' ? 'Published' : 'In Development'}</div>
+    </div>
   `;
-
+ 
+  // All tags in modal
   document.getElementById('modalTech').innerHTML = p.tags.map(t => `<span class="tech-tag">${t}</span>`).join('');
-
+ 
   document.getElementById('modalStore').innerHTML = p.playstore
-    ? `<a href="${p.playstore}" target="_blank" rel="noopener noreferrer" class="store-btn"><i class="ri-google-play-line"></i> View on Play Store</a>`
+    ? `<a href="${p.playstore}" target="_blank" rel="noopener noreferrer" class="store-btn">
+        <span class="ms" style="font-size:20px">play_circle</span> View on Play Store
+       </a>`
     : '';
-
+ 
   document.getElementById('modalOverlay').classList.add('active');
   document.body.style.overflow = 'hidden';
 }
-
+ 
 function closeModal() {
   document.getElementById('modalOverlay').classList.remove('active');
   document.body.style.overflow = '';
 }
-
+ 
 function handleOverlayClick(e) {
   if (e.target === document.getElementById('modalOverlay')) closeModal();
 }
-
+ 
 // ─── CONTACT FORM ───────────────────────────────────────────────────────────
 function submitContact() {
   const name = document.getElementById('cName').value.trim();
