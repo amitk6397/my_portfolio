@@ -1324,3 +1324,39 @@ footer{
   .exp-timeline{padding-left:24px;}
   footer{padding:20px 24px;}
 }
+
+
+/* ── FIX 1: Projects — no horizontal overflow on mobile ── */
+@media(max-width:768px){
+  .filter-bar{
+    flex-wrap: wrap;
+  }
+  .projects-grid{
+    grid-template-columns: 1fr;
+    overflow-x: hidden;           /* prevent any bleed */
+  }
+  #page-projects .section{
+    overflow-x: hidden;
+  }
+  .project-card{
+    width: 100%;
+    min-width: 0;                 /* prevent grid blowout */
+  }
+}
+
+/* ── FIX 2: Footer — stack vertically on mobile ── */
+@media(max-width:768px){
+  footer{
+    padding: 20px 20px;
+  }
+  .footer-inner{
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+  .footer-right{
+    flex-wrap: wrap;
+    gap: 10px 16px;
+    font-size: 11px;
+  }
+}
