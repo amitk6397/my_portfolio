@@ -73,25 +73,6 @@ const projects = [
 ];
 
 
-// CURSOR
-const cursor = document.getElementById('cursor');
-const ring = document.getElementById('cursorRing');
-let mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove',e=>{
-  mx=e.clientX;my=e.clientY;
-  cursor.style.transform=`translate(${mx-4}px,${my-4}px)`;
-});
-function animRing(){
-  rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;
-  ring.style.transform=`translate(${rx-18}px,${ry-18}px)`;
-  requestAnimationFrame(animRing);
-}
-animRing();
-document.querySelectorAll('a,button,[onclick]').forEach(el=>{
-  el.addEventListener('mouseenter',()=>{ring.style.transform+=' scale(1.5)';ring.style.borderColor='rgba(0,229,255,0.7)';});
-  el.addEventListener('mouseleave',()=>{ring.style.borderColor='rgba(0,229,255,0.4)';});
-});
-
 // NAV SCROLL
 window.addEventListener('scroll',()=>{
   document.getElementById('nav').classList.toggle('scrolled',window.scrollY>20);
@@ -132,7 +113,6 @@ function type(){
 type();
 
 // PROJECTS DATA
-
 function renderProjects(filter){
   const grid=document.getElementById('projectsGrid');
   const filtered=filter==='all'?projects:projects.filter(p=>p.status===filter);
@@ -216,24 +196,11 @@ function setTheme(t){
   document.querySelectorAll('.theme-btn').forEach(b=>{
     b.classList.toggle('active',b.dataset.themeVal===t);
   });
-  // cursor accent sync
-  const c=document.getElementById('cursor');
-  const r=document.getElementById('cursorRing');
-  if(t==='light'){
-    c.style.background='#0070F3';c.style.mixBlendMode='normal';
-    r.style.borderColor='rgba(0,112,243,0.4)';
-  } else if(t==='bw'){
-    c.style.background='#fff';c.style.mixBlendMode='difference';
-    r.style.borderColor='rgba(255,255,255,0.5)';
-  } else {
-    c.style.background='';c.style.mixBlendMode='screen';
-    r.style.borderColor='rgba(0,229,255,0.4)';
-  }
   localStorage.setItem('ak-theme',t);
 }
 // restore saved theme
 (function(){const saved=localStorage.getItem('ak-theme');if(saved)setTheme(saved);})();
 
-// NAV fix - inline style override
+// NAV fix
 const navEl=document.getElementById('nav');
 navEl.style.display='flex';
