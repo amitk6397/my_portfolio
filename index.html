@@ -4,6 +4,15 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 
+   <script>
+    (function() {
+      const saved = localStorage.getItem('ak-theme');
+      if (saved && saved !== 'dark') {
+        document.documentElement.setAttribute('data-theme', saved);
+      }
+    })();
+  </script>
+
   <!-- ── TAB TITLE ── -->
   <title>Amit.Dev</title>
 

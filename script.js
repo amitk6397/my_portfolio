@@ -204,3 +204,42 @@ function setTheme(t){
 // NAV fix
 const navEl=document.getElementById('nav');
 navEl.style.display='flex';
+
+
+// ── SCROLL REVEAL ANIMATION ──────────────────────────────────────────────────
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('revealed');
+      revealObserver.unobserve(entry.target); // Once done, stop watching
+    }
+  });
+}, {
+  threshold: 0.08,
+  rootMargin: '0px 0px -40px 0px'
+});
+
+function initReveal() {
+  const selectors = [
+    '.acard', '.stat-card', '.skill-card',
+    '.project-card', '.exp-card', '.contact-card',
+    '.section-header', '.filter-bar'
+  ];
+  selectors.forEach(sel => {
+    document.querySelectorAll(sel).forEach((el, i) => {
+      el.classList.remove('revealed');
+      el.classList.add('reveal');
+      el.style.transitionDelay = `${i * 60}ms`;
+      revealObserver.observe(el);
+    });
+  });
+}
+// Re-run whenever page changes
+const originalNavigate = navigate;
+window.navigate = function(page) {
+  originalNavigate(page);
+  setTimeout(initReveal, 50);
+};
+
+// Run on initial load
+setTimeout(initReveal, 100);
