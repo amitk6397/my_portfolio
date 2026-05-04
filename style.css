@@ -469,14 +469,16 @@ nav.scrolled{
 
 /* PAGES */
 #pages{padding-top:68px;}
-.page{display:none;min-height:100vh;}
+.page{display:none;min-height:unset;}
 .page.active{display:block;}
 
 /* ═══ HERO ═══ */
-#page-home{position:relative;overflow:hidden;}
+#page-home{position:relative;overflow:hidden;height:auto;}
 
 .hero-bg{
-  position:absolute;inset:0;pointer-events:none;z-index:0;
+  position:absolute;top:0;left:0;right:0;bottom:0;
+  pointer-events:none;z-index:0;
+  overflow:hidden;
 }
 .hero-bg .orb1{
   position:absolute;top:-200px;right:-100px;
@@ -502,7 +504,7 @@ nav.scrolled{
 /* HERO LAYOUT */
 .hero{
   position:relative;z-index:1;
-  min-height:calc(100vh - 68px);
+  min-height: unset;
   display:grid;
   grid-template-columns:1fr 380px;
   gap:40px;
