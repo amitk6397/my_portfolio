@@ -1,6 +1,17 @@
 // ─── DATA ────────────────────────────────────────────────────────────────────
 const projects = [
-  { id:'playOn', name:'PLAYON', status:'dev', emoji:'🎮', icon:'./public/playOn/logo.jpeg',
+   { id:'catchWatch', name:'Catch & Watch', status:'dev', emoji:'🎮', icon:'./public/catchOtt/1.jpeg',
+     screenshots:[
+      './public/catchOtt/1.jpeg','./public/catchOtt/2.jpeg','./public/catchOtt/3.jpeg',
+      './public/catchOtt/4.jpeg','./public/catchOtt/5.jpeg','./public/catchOtt/6.jpeg',
+      './public/catchOtt/7.jpeg','./public/catchOtt/8.jpeg','./public/catchOtt/9.jpeg',
+      './public/catchOtt/10.jpeg','./public/catchOtt/11.jpeg','./public/catchOtt/12.jpeg',
+      './public/catchOtt/13.jpeg','./public/catchOtt/14.jpeg',
+    ], role:'Senior Flutter Developer', company:'Kriti Digital Solutions', period:'June 2026 – Present',
+    description:'A modern OTT streaming platform where users can watch movies, short films, TV shows, and engaging reels in one seamless experience. The app offers high-quality video streaming, subscription-based premium content access, personalized recommendations, watchlists, and smooth media playback. Users can upload and share reels, while all long-form content like movies and TV shows is managed by the platform admin.',
+    tags:['Flutter','Provider', "MVVM",'Dio','Sports / OTT'], playstore:'https://play.google.com/store/apps/details?id=com.cametech.playon' },
+
+  { id:'playOn', name:'PLAYON', status:'published', emoji:'🎮', icon:'./public/playOn/logo.jpeg',
      screenshots:[
       './public/playOn/1.jpeg','./public/playOn/2.jpeg','./public/playOn/3.jpeg',
       './public/playOn/4.jpeg','./public/playOn/5.jpeg','./public/playOn/6.jpeg',
@@ -9,16 +20,26 @@ const projects = [
       './public/playOn/13.jpeg',
     ], role:'Senior Flutter Developer', company:'Kriti Digital Solutions', period:'April 2026 – Present',
     description:'A dynamic sports streaming platform that brings you live matches, highlights, and updates across cricket, football, tennis, basketball, and more. Watch real-time action, catch match recaps, stream live TV channels, and stay updated with upcoming match schedules and tournaments—all in one place.',
-    tags:['Flutter','GetX','Dio','Sports / OTT'], playstore:null },
+    tags:['Flutter','GetX','Dio','Sports / OTT'], playstore:'https://play.google.com/store/apps/details?id=com.cametech.playon' },
 
   { id:'samagran', name:'Samagran', status:'dev', emoji:'🕉️', icon:'./public/samagran/sama.jpeg',
      screenshots:[
       './public/samagran/1.jpeg','./public/samagran/3.jpeg','./public/samagran/4.jpeg',
-      './public/samagran/5.jpeg','./public/samagran/6.jpeg','./public/samagran/2.jpeg',
+      './public/samagran/5.jpeg','./public/samagran/6.jpeg',
       './public/samagran/7.jpeg','./public/samagran/8.jpeg','./public/samagran/9.jpeg',
       './public/samagran/10.jpeg','./public/samagran/11.jpeg','./public/samagran/12.jpeg',
       './public/samagran/13.jpeg','./public/samagran/15.jpeg','./public/samagran/16.jpeg',
       './public/samagran/17.jpeg','./public/samagran/20.jpeg',
+      './public/samagran/14.jpeg','./public/samagran/18.jpeg',
+      
+      './public/samagran/21.jpeg','./public/samagran/22.jpeg','./public/samagran/23.jpeg',
+      './public/samagran/24.jpeg','./public/samagran/25.jpeg','./public/samagran/26.jpeg',
+      './public/samagran/27.jpeg','./public/samagran/28.jpeg','./public/samagran/29.jpeg',
+      './public/samagran/30.jpeg','./public/samagran/31.jpeg','./public/samagran/32.jpeg',
+      './public/samagran/33.jpeg','./public/samagran/34.jpeg','./public/samagran/35.jpeg',
+      './public/samagran/36.jpeg','./public/samagran/37.jpeg',
+      './public/samagran/38.jpeg','./public/samagran/39.jpeg',
+      './public/samagran/40.jpeg',
     ], role:'Senior Flutter Developer', company:'Kriti Digital Solutions', period:'Jan 2026 – Present',
     description:'A religious service platform for booking Pandits and purchasing pooja kits for rituals.',
     tags:['Flutter','Riverpod','Firebase FCM','Agora RTC','Razorpay Payments','Location','RESTApis'], playstore:null },
@@ -54,7 +75,7 @@ const projects = [
       './public/tocken/13.jpeg','./public/tocken/14.jpeg',
     ], role:'Senior Flutter Developer', company:'Kriti Digital Solutions', period:'Jan 2026 – Mar 2026',
     description:'A queue management system for digital token handling with real-time updates.',
-    tags:['Provider','Http','PhonePe Payments','Flutter','Shared Preferences'], playstore:'https://play.google.com/store/search?q=tocken' },
+    tags:['Provider','Http','PhonePe Payments','Flutter','Shared Preferences'], playstore:'https://play.google.com/store/apps/details?id=com.tocken.crackjack' },
 
   { id:'mitratender', name:'Mitra Tender', status:'published', emoji:'📄', icon:'./public/mt/logo.jpeg',
      screenshots:[
@@ -63,13 +84,13 @@ const projects = [
       './public/mt/7.jpeg','./public/mt/8.jpeg','./public/mt/9.jpeg','./public/mt/10.jpeg',
     ], role:'Flutter Developer (Junior)', company:'Arema Technologies', period:'Aug 2025 – Oct 2025',
     description:'A tender search platform with advanced filtering, document downloads, and real-time data.',
-    tags:['Flutter','GetX','Razorpay Payments','Dio'], playstore:'https://play.google.com/store/search?q=mitra+tender' },
+    tags:['Flutter','GetX','Razorpay Payments','Dio'], playstore:'https://play.google.com/store/apps/details?id=com.tenders.mitratender' },
 
   { id:'opastrip', name:'Opas Trip', status:'published', emoji:'✈️', icon:'public/opastrip/icon.png',
     screenshots:['public/opastrip/ss1.png','public/opastrip/ss2.png','public/opastrip/ss3.png'],
     role:'Flutter Developer (Junior)', company:'Arema Technologies', period:'Jun 2025 – Dec 2025',
     description:'A travel booking app with flights, hotels, and tour package booking features.',
-    tags:['Flutter','GetX','Razorpay Payments','http','TripJack Services','Travel / Booking'], playstore:'https://play.google.com/store/search?q=opas+trip' },
+    tags:['Flutter','GetX','Razorpay Payments','http','TripJack Services','Travel / Booking'], playstore:'https://play.google.com/store/apps/details?id=com.otrips.app' },
 ];
 
 
