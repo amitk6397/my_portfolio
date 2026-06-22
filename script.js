@@ -1,5 +1,5 @@
 // ─── DATA ────────────────────────────────────────────────────────────────────
-const projects = [
+const projects = window.portfolioProjects || [
    { id:'catchWatch', name:'Catch & Watch', status:'dev', emoji:'🎮', icon:'./public/catchOtt/1.jpeg',
      screenshots:[
       './public/catchOtt/1.jpeg','./public/catchOtt/2.jpeg','./public/catchOtt/3.jpeg',
@@ -205,8 +205,43 @@ function submitContact(){
   const email=document.getElementById('cEmail').value.trim();
   const msg=document.getElementById('cMessage').value.trim();
   if(!name||!email||!msg){alert('Please fill in all fields.');return;}
-  window.location.href=`mailto:amitk15042003@gmail.com?subject=Portfolio Contact from ${encodeURIComponent(name)}&body=${encodeURIComponent('Name: '+name+'\nEmail: '+email+'\n\nMessage:\n'+msg)}`;
-  const s=document.getElementById('formSuccess');s.style.display='flex';
+
+  const submitBtn = document.querySelector('.send-btn');
+  const originalText = submitBtn.innerHTML;
+  submitBtn.disabled = true;
+  submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending...';
+
+  const formData = new FormData();
+  formData.append('name', name);
+  formData.append('email', email);
+  formData.append('message', msg);
+
+  fetch('submit_inquiry', {
+    method: 'POST',
+    body: formData
+  })
+  .then(res => res.json())
+  .then(data => {
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = originalText;
+    if(data.status === 'success') {
+      document.getElementById('cName').value = '';
+      document.getElementById('cEmail').value = '';
+      document.getElementById('cMessage').value = '';
+      const s = document.getElementById('formSuccess');
+      s.textContent = data.message;
+      s.style.display = 'flex';
+      setTimeout(() => { s.style.display = 'none'; }, 5000);
+    } else {
+      alert(data.message || 'Something went wrong.');
+    }
+  })
+  .catch(err => {
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = originalText;
+    console.error(err);
+    alert('An error occurred. Please try again.');
+  });
 }
 
 // THEME

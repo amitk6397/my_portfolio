@@ -1,0 +1,16 @@
+DirectoryIndex login.php
+
+RewriteEngine On
+
+# Redirect admin root requests internally to login.php
+RewriteRule ^$ login.php [L]
+
+# Remove .php extension from URL (redirect to clean URL), but ignore POST requests
+RewriteCond %{REQUEST_METHOD} !POST
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s([^.]+)\.php [NC]
+RewriteRule ^ %1 [R=301,L]
+
+# Map clean URL back to PHP file internally
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteRule ^(.*?)/?$ $1.php [L]

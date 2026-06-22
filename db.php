@@ -1,0 +1,467 @@
+<?php
+require_once __DIR__ . '/config.php';
+
+class Database {
+    private static $instance = null;
+    private $pdo;
+
+    private function __construct() {
+        try {
+            // First connect without database name to ensure database exists
+            $dsn = "mysql:host=" . DB_HOST . ";charset=utf8mb4";
+            $options = [
+                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+                PDO::ATTR_EMULATE_PREPARES => false,
+            ];
+            $tempPdo = new PDO($dsn, DB_USER, DB_PASS, $options);
+            
+            // Create database if not exists
+            $tempPdo->exec("CREATE DATABASE IF NOT EXISTS `" . DB_NAME . "` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci");
+            $tempPdo = null;
+
+            // Connect to database
+            $this->pdo = new PDO($dsn . ";dbname=" . DB_NAME, DB_USER, DB_PASS, $options);
+            
+            // Create tables if not exists
+            $this->initTables();
+
+        } catch (PDOException $e) {
+            die("Database Connection failed: " . $e->getMessage());
+        }
+    }
+
+    public static function getInstance() {
+        if (self::$instance === null) {
+            self::$instance = new self();
+        }
+        return self::$instance;
+    }
+
+    public function getConnection() {
+        return $this->pdo;
+    }
+
+    private function initTables() {
+        // 1. Admin Users Table
+        $this->pdo->exec("CREATE TABLE IF NOT EXISTS `admin_users` (
+            `id` INT AUTO_INCREMENT PRIMARY KEY,
+            `username` VARCHAR(50) UNIQUE NOT NULL,
+            `password` VARCHAR(255) NOT NULL,
+            `email` VARCHAR(100) NULL,
+            `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        ) ENGINE=InnoDB;");
+
+        // Safely add reset token columns to admin_users table
+        try {
+            $this->pdo->exec("ALTER TABLE `admin_users` ADD `reset_token` VARCHAR(255) NULL");
+        } catch (PDOException $e) {
+            // Column already exists
+        }
+        try {
+            $this->pdo->exec("ALTER TABLE `admin_users` ADD `reset_token_expiry` DATETIME NULL");
+        } catch (PDOException $e) {
+            // Column already exists
+        }
+        try {
+            $this->pdo->exec("ALTER TABLE `admin_users` ADD `otp_code` VARCHAR(10) NULL");
+        } catch (PDOException $e) {
+            // Column already exists
+        }
+        try {
+            $this->pdo->exec("ALTER TABLE `admin_users` ADD `otp_expiry` DATETIME NULL");
+        } catch (PDOException $e) {
+            // Column already exists
+        }
+
+        // 2. About Settings Table
+        $this->pdo->exec("CREATE TABLE IF NOT EXISTS `about_settings` (
+            `id` INT PRIMARY KEY,
+            `hero_name` VARCHAR(100) NOT NULL,
+            `hero_desc` TEXT NULL,
+            `resume_url` VARCHAR(255) NULL,
+            `linkedin_url` VARCHAR(255) NULL,
+            `github_url` VARCHAR(255) NULL,
+            `contact_email` VARCHAR(100) NULL,
+            `contact_phone` VARCHAR(20) NULL,
+            `contact_location` VARCHAR(100) NULL,
+            `status_text` VARCHAR(50) NULL,
+            `stack_text` VARCHAR(100) NULL,
+            `experience_years` VARCHAR(20) NULL,
+            `passion_text` VARCHAR(100) NULL,
+            `story_title` VARCHAR(255) NULL,
+            `story_desc` TEXT NULL,
+            `education_title` VARCHAR(255) NULL,
+            `education_desc` TEXT NULL,
+            `backend_title` VARCHAR(255) NULL,
+            `backend_desc` TEXT NULL,
+            `philosophy_title` VARCHAR(255) NULL,
+            `philosophy_desc` TEXT NULL,
+            `firebase_title` VARCHAR(255) NULL,
+            `firebase_desc` TEXT NULL,
+            `photo_url` VARCHAR(255) NULL
+        ) ENGINE=InnoDB;");
+
+        // 3. Projects Table
+        $this->pdo->exec("CREATE TABLE IF NOT EXISTS `projects` (
+            `id` INT AUTO_INCREMENT PRIMARY KEY,
+            `project_key` VARCHAR(50) UNIQUE NOT NULL,
+            `name` VARCHAR(100) NOT NULL,
+            `status` VARCHAR(20) NOT NULL,
+            `emoji` VARCHAR(10) NULL,
+            `icon` VARCHAR(255) NULL,
+            `screenshots` TEXT NULL,
+            `role` VARCHAR(100) NULL,
+            `company` VARCHAR(100) NULL,
+            `period` VARCHAR(100) NULL,
+            `description` TEXT NULL,
+            `tags` VARCHAR(255) NULL,
+            `playstore` VARCHAR(255) NULL,
+            `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        ) ENGINE=InnoDB;");
+
+        // 4. Experience Table
+        $this->pdo->exec("CREATE TABLE IF NOT EXISTS `experience` (
+            `id` INT AUTO_INCREMENT PRIMARY KEY,
+            `role` VARCHAR(100) NOT NULL,
+            `company` VARCHAR(100) NOT NULL,
+            `period` VARCHAR(100) NOT NULL,
+            `type` VARCHAR(50) NOT NULL,
+            `description` TEXT NULL,
+            `is_current` TINYINT(1) DEFAULT 0,
+            `sort_order` INT DEFAULT 0,
+            `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        ) ENGINE=InnoDB;");
+
+        // 5. Inquiries Table
+        $this->pdo->exec("CREATE TABLE IF NOT EXISTS `inquiries` (
+            `id` INT AUTO_INCREMENT PRIMARY KEY,
+            `name` VARCHAR(100) NOT NULL,
+            `email` VARCHAR(100) NOT NULL,
+            `message` TEXT NOT NULL,
+            `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        ) ENGINE=InnoDB;");
+
+        // 6. SMTP Settings Table
+        $this->pdo->exec("CREATE TABLE IF NOT EXISTS `smtp_settings` (
+            `id` INT PRIMARY KEY,
+            `smtp_host` VARCHAR(255) NOT NULL,
+            `smtp_port` INT NOT NULL,
+            `smtp_user` VARCHAR(255) NOT NULL,
+            `smtp_pass` VARCHAR(255) NOT NULL,
+            `smtp_secure` VARCHAR(10) NOT NULL,
+            `sender_email` VARCHAR(255) NOT NULL,
+            `sender_name` VARCHAR(255) NOT NULL,
+            `recipient_email` VARCHAR(255) NOT NULL
+        ) ENGINE=InnoDB;");
+
+        // Run Seeder
+        $this->seedInitialData();
+    }
+
+    private function seedInitialData() {
+        // 1. Seed Admin User
+        $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM `admin_users`");
+        $stmt->execute();
+        if ($stmt->fetchColumn() == 0) {
+            $hashedPassword = password_hash('admin123', PASSWORD_DEFAULT);
+            $stmtInsert = $this->pdo->prepare("INSERT INTO `admin_users` (`username`, `password`, `email`) VALUES ('admin', :pass, 'amitk15webhopers@gmail.com')");
+            $stmtInsert->execute(['pass' => $hashedPassword]);
+        }
+
+        // 2. Seed About Settings
+        $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM `about_settings` WHERE `id` = 1");
+        $stmt->execute();
+        if ($stmt->fetchColumn() == 0) {
+            $stmtInsert = $this->pdo->prepare("INSERT INTO `about_settings` (
+                `id`, `hero_name`, `hero_desc`, `resume_url`, `linkedin_url`, `github_url`, 
+                `contact_email`, `contact_phone`, `contact_location`, `status_text`, `stack_text`, 
+                `experience_years`, `passion_text`, `story_title`, `story_desc`, 
+                `education_title`, `education_desc`, `backend_title`, `backend_desc`, 
+                `philosophy_title`, `philosophy_desc`, `firebase_title`, `firebase_desc`, `photo_url`
+            ) VALUES (
+                1, 
+                'Amit Kumar', 
+                'Building pixel-perfect mobile apps and robust backend systems. Turning complex ideas into seamless digital experiences — one Flutter widget at a time.', 
+                'Amit_kumar_Resume.pdf', 
+                'https://www.linkedin.com/in/amit-kumar-190965316/', 
+                'https://github.com/amitk6397', 
+                'amitk15webhopers@gmail.com', 
+                '+91 6397892585', 
+                'Agra, India', 
+                'Available', 
+                'Flutter / Dart', 
+                '2+', 
+                'Mobile UX & Clean Arch', 
+                'From Agra to production-grade Flutter apps', 
+                'I\'m a Flutter developer from Agra, India with 2+ years building production-grade mobile applications. Started with Java, fell in love with mobile development, and found my true home in Flutter\'s ecosystem. I believe great apps aren\'t just functional — they\'re intuitive, fast, and a joy to use. Currently building at Kriti Digital Solutions, I specialize in clean architecture, state management, and crafting experiences users love.',
+                'MCA Graduate', 
+                'Master of Computer Applications from Mangalayatan University, Aligarh — Jul 2023 to Aug 2025. Solid foundation in mobile dev, DSA & software engineering.', 
+                'Server Side Too', 
+                'Building and consuming RESTful APIs with Node.js and Spring Boot. Solid JWT auth experience.', 
+                'Clean code, clean arch', 
+                'MVC/MVVM by default. Performance optimization is my obsession. Ship things that actually work.', 
+                'Real-time Ready', 
+                'Firestore, Firebase Auth, FCM push notifications, Firebase Storage — integrated into production apps.', 
+                'amit_photo.jpeg'
+            )");
+            $stmtInsert->execute();
+        }
+
+        // 3. Seed Experiences
+        $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM `experience`");
+        $stmt->execute();
+        if ($stmt->fetchColumn() == 0) {
+            $experiences = [
+                [
+                    'role' => 'Flutter Developer',
+                    'company' => 'Kriti Digital Solutions',
+                    'period' => 'Jan 2026 – Present',
+                    'type' => 'fulltime',
+                    'description' => 'Developing and maintaining scalable Flutter applications with clean architecture, RESTful API integration, performance optimization, bug fixing, and feature implementation across multiple production apps.',
+                    'is_current' => 1,
+                    'sort_order' => 1
+                ],
+                [
+                    'role' => 'Flutter Developer',
+                    'company' => 'Arema Technologies',
+                    'period' => 'Jul 2025 – Dec 2025',
+                    'type' => 'fulltime',
+                    'description' => 'Worked on production-level Flutter applications, handling feature development, API integration, bug fixing, performance optimization, and implementing scalable architecture using GetX, Provider, Riverpod with MVC/MVVM patterns.',
+                    'is_current' => 0,
+                    'sort_order' => 2
+                ],
+                [
+                    'role' => 'Flutter Developer',
+                    'company' => 'Webhopers Infotech Pvt. Ltd.',
+                    'period' => 'Aug 2024 – Jun 2025',
+                    'type' => 'intern',
+                    'description' => '6-month Internship + 4-month Junior Mobile Application Developer. Built production apps using Flutter, Dart, Firebase, State Management (GetX, Provider, Riverpod) and MVC/MVVM architecture.',
+                    'is_current' => 0,
+                    'sort_order' => 3
+                ],
+                [
+                    'role' => 'Java Intern',
+                    'company' => 'Codtech IT Solutions Pvt. Ltd.',
+                    'period' => 'Jul 2024 – Aug 2024',
+                    'type' => 'intern',
+                    'description' => 'Completed intensive Java programming training and development projects. Built a strong foundation in OOP, data structures, and software design principles.',
+                    'is_current' => 0,
+                    'sort_order' => 4
+                ]
+            ];
+
+            $stmtInsert = $this->pdo->prepare("INSERT INTO `experience` (`role`, `company`, `period`, `type`, `description`, `is_current`, `sort_order`) VALUES (:role, :company, :period, :type, :description, :is_current, :sort_order)");
+            foreach ($experiences as $exp) {
+                $stmtInsert->execute($exp);
+            }
+        }
+
+        // 4. Seed Projects
+        $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM `projects`");
+        $stmt->execute();
+        if ($stmt->fetchColumn() == 0) {
+            $projects = [
+                [
+                    'project_key' => 'catchWatch',
+                    'name' => 'Catch & Watch',
+                    'status' => 'dev',
+                    'emoji' => '🎮',
+                    'icon' => './public/catchOtt/1.jpeg',
+                    'screenshots' => json_encode([
+                        './public/catchOtt/1.jpeg','./public/catchOtt/2.jpeg','./public/catchOtt/3.jpeg',
+                        './public/catchOtt/4.jpeg','./public/catchOtt/5.jpeg','./public/catchOtt/6.jpeg',
+                        './public/catchOtt/7.jpeg','./public/catchOtt/8.jpeg','./public/catchOtt/9.jpeg',
+                        './public/catchOtt/10.jpeg','./public/catchOtt/11.jpeg','./public/catchOtt/12.jpeg',
+                        './public/catchOtt/13.jpeg','./public/catchOtt/14.jpeg'
+                    ]),
+                    'role' => 'Senior Flutter Developer',
+                    'company' => 'Kriti Digital Solutions',
+                    'period' => 'June 2026 – Present',
+                    'description' => 'A modern OTT streaming platform where users can watch movies, short films, TV shows, and engaging reels in one seamless experience. The app offers high-quality video streaming, subscription-based premium content access, personalized recommendations, watchlists, and smooth media playback. Users can upload and share reels, while all long-form content like movies and TV shows is managed by the platform admin.',
+                    'tags' => 'Flutter,Provider,MVVM,Dio,Sports / OTT',
+                    'playstore' => 'https://play.google.com/store/apps/details?id=com.cametech.playon'
+                ],
+                [
+                    'project_key' => 'playOn',
+                    'name' => 'PLAYON',
+                    'status' => 'published',
+                    'emoji' => '🎮',
+                    'icon' => './public/playOn/logo.jpeg',
+                    'screenshots' => json_encode([
+                        './public/playOn/1.jpeg','./public/playOn/2.jpeg','./public/playOn/3.jpeg',
+                        './public/playOn/4.jpeg','./public/playOn/5.jpeg','./public/playOn/6.jpeg',
+                        './public/playOn/7.jpeg','./public/playOn/8.jpeg','./public/playOn/9.jpeg',
+                        './public/playOn/10.jpeg','./public/playOn/11.jpeg','./public/playOn/12.jpeg',
+                        './public/playOn/13.jpeg'
+                    ]),
+                    'role' => 'Senior Flutter Developer',
+                    'company' => 'Kriti Digital Solutions',
+                    'period' => 'April 2026 – Present',
+                    'description' => 'A dynamic sports streaming platform that brings you live matches, highlights, and updates across cricket, football, tennis, basketball, and more. Watch real-time action, catch match recaps, stream live TV channels, and stay updated with upcoming match schedules and tournaments—all in one place.',
+                    'tags' => 'Flutter,GetX,Dio,Sports / OTT',
+                    'playstore' => 'https://play.google.com/store/apps/details?id=com.cametech.playon'
+                ],
+                [
+                    'project_key' => 'samagran',
+                    'name' => 'Samagran',
+                    'status' => 'dev',
+                    'emoji' => '🕉️',
+                    'icon' => './public/samagran/sama.jpeg',
+                    'screenshots' => json_encode([
+                        './public/samagran/1.jpeg','./public/samagran/3.jpeg','./public/samagran/4.jpeg',
+                        './public/samagran/5.jpeg','./public/samagran/6.jpeg',
+                        './public/samagran/7.jpeg','./public/samagran/8.jpeg','./public/samagran/9.jpeg',
+                        './public/samagran/10.jpeg','./public/samagran/11.jpeg','./public/samagran/12.jpeg',
+                        './public/samagran/13.jpeg','./public/samagran/15.jpeg','./public/samagran/16.jpeg',
+                        './public/samagran/17.jpeg','./public/samagran/20.jpeg',
+                        './public/samagran/14.jpeg','./public/samagran/18.jpeg',
+                        './public/samagran/21.jpeg','./public/samagran/22.jpeg','./public/samagran/23.jpeg',
+                        './public/samagran/24.jpeg','./public/samagran/25.jpeg','./public/samagran/26.jpeg',
+                        './public/samagran/27.jpeg','./public/samagran/28.jpeg','./public/samagran/29.jpeg',
+                        './public/samagran/30.jpeg','./public/samagran/31.jpeg','./public/samagran/32.jpeg',
+                        './public/samagran/33.jpeg','./public/samagran/34.jpeg','./public/samagran/35.jpeg',
+                        './public/samagran/36.jpeg','./public/samagran/37.jpeg',
+                        './public/samagran/38.jpeg','./public/samagran/39.jpeg',
+                        './public/samagran/40.jpeg'
+                    ]),
+                    'role' => 'Senior Flutter Developer',
+                    'company' => 'Kriti Digital Solutions',
+                    'period' => 'Jan 2026 – Present',
+                    'description' => 'A religious service platform for booking Pandits and purchasing pooja kits for rituals.',
+                    'tags' => 'Flutter,Riverpod,Firebase FCM,Agora RTC,Razorpay Payments,Location,RESTApis',
+                    'playstore' => null
+                ],
+                [
+                    'project_key' => 'eyehospital',
+                    'name' => 'Eye Hospital',
+                    'status' => 'dev',
+                    'emoji' => '👁️',
+                    'icon' => './public/eye_hospital/icon.jpeg',
+                    'screenshots' => json_encode(['./public/eye_hospital/ss1.png','./public/eye_hospital/ss2.png','./public/eye_hospital/ss3.png']),
+                    'role' => 'Senior Flutter Developer',
+                    'company' => 'Kriti Digital Solutions',
+                    'period' => 'Jan 2026 – Present',
+                    'description' => 'A healthcare app for booking doctor appointments, managing records, and ordering spectacles online.',
+                    'tags' => 'Flutter,GetX,Cashfree Payments,Healthcare',
+                    'playstore' => null
+                ],
+                [
+                    'project_key' => 'nsquare',
+                    'name' => 'N Square Shorts',
+                    'status' => 'dev',
+                    'emoji' => '🎬',
+                    'icon' => './public/n_inter/logo.jpeg',
+                    'screenshots' => json_encode([
+                        './public/n_inter/1.jpeg','./public/n_inter/2.jpeg','./public/n_inter/3.jpeg',
+                        './public/n_inter/4.jpeg','./public/n_inter/5.jpeg','./public/n_inter/6.jpeg',
+                        './public/n_inter/7.jpeg','./public/n_inter/8.jpeg','./public/n_inter/9.jpeg',
+                        './public/n_inter/10.jpeg','./public/n_inter/11.jpeg'
+                    ]),
+                    'role' => 'Senior Flutter Developer',
+                    'company' => 'Kriti Digital Solutions',
+                    'period' => 'Mar 2026 – Apr 2026',
+                    'description' => 'A short drama streaming platform with categorized content and subscriptions.',
+                    'tags' => 'Flutter,GetX,OTT / Streaming',
+                    'playstore' => null
+                ],
+                [
+                    'project_key' => 'oyecam',
+                    'name' => 'Oyecam',
+                    'status' => 'dev',
+                    'emoji' => '📹',
+                    'icon' => './public/oyecam/oyecam.jpeg',
+                    'screenshots' => json_encode(['./public/oyecam/ss1.png','./public/oyecam/ss2.png','./public/oyecam/ss3.png']),
+                    'role' => 'Senior Flutter Developer',
+                    'company' => 'Kriti Digital Solutions',
+                    'period' => 'Feb 2026 – Pending',
+                    'description' => 'A social platform with chat, calls, live streaming, and a coin-based gifting system.',
+                    'tags' => 'GetX,Hive,Agora RTC,Razorpay Payments,Dio,socket.io,Social / Communication',
+                    'playstore' => null
+                ],
+                [
+                    'project_key' => 'tocken',
+                    'name' => 'Tocken App',
+                    'status' => 'published',
+                    'emoji' => '🎟️',
+                    'icon' => './public/tocken/tocken.jpeg',
+                    'screenshots' => json_encode([
+                        './public/tocken/3.jpeg','./public/tocken/4.jpeg','./public/tocken/5.jpeg',
+                        './public/tocken/6.jpeg','./public/tocken/7.jpeg','./public/tocken/8.jpeg',
+                        './public/tocken/1.jpeg','./public/tocken/2.jpeg','./public/tocken/9.jpeg',
+                        './public/tocken/10.jpeg','./public/tocken/11.jpeg','./public/tocken/12.jpeg',
+                        './public/tocken/13.jpeg','./public/tocken/14.jpeg'
+                    ]),
+                    'role' => 'Senior Flutter Developer',
+                    'company' => 'Kriti Digital Solutions',
+                    'period' => 'Jan 2026 – Mar 2026',
+                    'description' => 'A queue management system for digital token handling with real-time updates.',
+                    'tags' => 'Provider,Http,PhonePe Payments,Flutter,Shared Preferences',
+                    'playstore' => 'https://play.google.com/store/apps/details?id=com.tocken.crackjack'
+                ],
+                [
+                    'project_key' => 'mitratender',
+                    'name' => 'Mitra Tender',
+                    'status' => 'published',
+                    'emoji' => '📄',
+                    'icon' => './public/mt/logo.jpeg',
+                    'screenshots' => json_encode([
+                        './public/mt/1.jpeg','./public/mt/3.jpeg','./public/mt/4.jpeg',
+                        './public/mt/5.jpeg','./public/mt/6.jpeg','./public/mt/2.jpeg',
+                        './public/mt/7.jpeg','./public/mt/8.jpeg','./public/mt/9.jpeg','./public/mt/10.jpeg'
+                    ]),
+                    'role' => 'Flutter Developer (Junior)',
+                    'company' => 'Arema Technologies',
+                    'period' => 'Aug 2025 – Oct 2025',
+                    'description' => 'A tender search platform with advanced filtering, document downloads, and real-time data.',
+                    'tags' => 'Flutter,GetX,Razorpay Payments,Dio',
+                    'playstore' => 'https://play.google.com/store/apps/details?id=com.tenders.mitratender'
+                ],
+                [
+                    'project_key' => 'opastrip',
+                    'name' => 'Opas Trip',
+                    'status' => 'published',
+                    'emoji' => '✈️',
+                    'icon' => 'public/opastrip/icon.png',
+                    'screenshots' => json_encode(['public/opastrip/ss1.png','public/opastrip/ss2.png','public/opastrip/ss3.png']),
+                    'role' => 'Flutter Developer (Junior)',
+                    'company' => 'Arema Technologies',
+                    'period' => 'Jun 2025 – Dec 2025',
+                    'description' => 'A travel booking app with flights, hotels, and tour package booking features.',
+                    'tags' => 'Flutter,GetX,Razorpay Payments,http,TripJack Services,Travel / Booking',
+                    'playstore' => 'https://play.google.com/store/apps/details?id=com.otrips.app'
+                ]
+            ];
+
+            $stmtInsert = $this->pdo->prepare("INSERT INTO `projects` (
+                `project_key`, `name`, `status`, `emoji`, `icon`, `screenshots`, `role`, `company`, `period`, `description`, `tags`, `playstore`
+            ) VALUES (
+                :project_key, :name, :status, :emoji, :icon, :screenshots, :role, :company, :period, :description, :tags, :playstore
+            )");
+            foreach ($projects as $proj) {
+                $stmtInsert->execute($proj);
+            }
+        }
+
+        // 5. Seed SMTP Settings
+        $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM `smtp_settings` WHERE `id` = 1");
+        $stmt->execute();
+        if ($stmt->fetchColumn() == 0) {
+            $stmtInsert = $this->pdo->prepare("INSERT INTO `smtp_settings` (
+                `id`, `smtp_host`, `smtp_port`, `smtp_user`, `smtp_pass`, `smtp_secure`, `sender_email`, `sender_name`, `recipient_email`
+            ) VALUES (
+                1,
+                'smtp.gmail.com',
+                465,
+                'amitk15webhopers@gmail.com',
+                'wyut qupi rbno ihbo',
+                'ssl',
+                'amitk15webhopers@gmail.com',
+                'Amit Kumar Dev',
+                'amitk15webhopers@gmail.com'
+            )");
+            $stmtInsert->execute();
+        }
+    }
+}
+?>
